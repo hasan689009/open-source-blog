@@ -1,0 +1,74 @@
+header#page-topbar
+        .layout-width
+          .navbar-header
+            .d-flex
+              // LOGO
+              .navbar-brand-box.horizontal-logo
+                a.logo.logo-dark(href='index.html')
+                  span.logo-sm
+                    img(src='/images/logo-sm.png', alt='', height='22')
+                  span.logo-lg
+                    img(src='/images/logo-dark.png', alt='', height='17')
+                a.logo.logo-light(href='index.html')
+                  span.logo-sm
+                    img(src='/images/logo-sm.png', alt='', height='22')
+                  span.logo-lg
+                    img(src='/images/logo-light.png', alt='', height='17')
+              button#topnav-hamburger-icon.btn.btn-sm.px-3.fs-16.header-item.vertical-menu-btn.topnav-hamburger(type='button')
+                span.hamburger-icon
+                  span
+                  span
+                  span
+            .d-flex.align-items-center
+              .ms-1.header-item.d-none.d-sm-flex
+                button.btn.btn-icon.btn-topbar.btn-ghost-secondary.rounded-circle(type='button', data-toggle='fullscreen')
+                  i.bx.bx-fullscreen.fs-22
+              .ms-1.header-item.d-none.d-sm-flex
+                button.btn.btn-icon.btn-topbar.btn-ghost-secondary.rounded-circle.light-dark-mode(type='button')
+                  i.bx.bx-moon.fs-22
+              .dropdown.ms-sm-3.header-item.topbar-user
+                button#page-header-user-dropdown.btn(type='button', data-bs-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                  span.d-flex.align-items-center
+                    img.rounded-circle.header-profile-user(src='/images/users/avatar-1.jpg', alt='Header Avatar')
+                    span.text-start.ms-xl-2
+                      span.d-none.d-xl-inline-block.ms-1.fw-medium.user-name-text Anna Adame
+                      span.d-none.d-xl-block.ms-1.fs-12.text-muted.user-name-sub-text Founder
+                .dropdown-menu.dropdown-menu-end
+                  // item
+                  h6.dropdown-header Welcome Anna!
+                  a.dropdown-item(href='pages-profile.html')
+                    i.mdi.mdi-account-circle.text-muted.fs-16.align-middle.me-1
+                    |  
+                    span.align-middle Profile
+                  a.dropdown-item(href='apps-chat.html')
+                    i.mdi.mdi-message-text-outline.text-muted.fs-16.align-middle.me-1
+                    |  
+                    span.align-middle Messages
+                  a.dropdown-item(href='apps-tasks-kanban.html')
+                    i.mdi.mdi-calendar-check-outline.text-muted.fs-16.align-middle.me-1
+                    |  
+                    span.align-middle Taskboard
+                  a.dropdown-item(href='pages-faqs.html')
+                    i.mdi.mdi-lifebuoy.text-muted.fs-16.align-middle.me-1
+                    |  
+                    span.align-middle Help
+                  .dropdown-divider
+                  a.dropdown-item(href='pages-profile.html')
+                    i.mdi.mdi-wallet.text-muted.fs-16.align-middle.me-1
+                    |  
+                    span.align-middle
+                      | Balance : 
+                      b $5971.67
+                  a.dropdown-item(href='pages-profile-settings.html')
+                    span.badge.bg-soft-success.text-success.mt-1.float-end New
+                    i.mdi.mdi-cog-outline.text-muted.fs-16.align-middle.me-1
+                    |  
+                    span.align-middle Settings
+                  a.dropdown-item(href='auth-lockscreen-basic.html')
+                    i.mdi.mdi-lock.text-muted.fs-16.align-middle.me-1
+                    |  
+                    span.align-middle Lock screen
+                  a.dropdown-item(href='/logout' onclick="event.preventDefault();document.getElementById('logout-form').submit();")
+                    i.mdi.mdi-logout.text-muted.fs-16.align-middle.me-1
+                    span.align-middle(data-key='t-logout') Logout
+                  form#logout-form(action='/logout' method='POST' style='display: none;')

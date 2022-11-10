@@ -1,0 +1,75 @@
+doctype html
+head
+  meta(charset='utf-8')
+  title Sign In | #{title ? title : 'Learn with hasan'}
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  meta(content='Learn with hasan | popular tech blog' name='description')
+  meta(content='Themesbrand' name='author')
+  // App favicon
+  link(rel='shortcut icon' href='/images/favicon.ico')
+  // Bootstrap Css
+  link(href='css/bootstrap.min.css' rel='stylesheet' type='text/css')
+  // Icons Css
+  link(href='css/icons.min.css' rel='stylesheet' type='text/css')
+  // App Css
+  link(href='css/app.min.css' rel='stylesheet' type='text/css')
+  // custom Css
+  link(href='css/custom.min.css' rel='stylesheet' type='text/css')
+.auth-page-wrapper.pt-5
+  // auth page bg
+  #auth-particles.auth-one-bg-position.auth-one-bg
+    .bg-overlay
+    .shape
+      svg(xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' viewbox='0 0 1440 120')
+        path(d='M 0,36 C 144,53.6 432,123.2 720,124 C 1008,124.8 1296,56.8 1440,40L1440 140L0 140z')
+  // auth page content
+  .auth-page-content
+    .container
+      .row
+        .col-lg-12
+          .text-center.mt-sm-5.mb-4.text-white-50
+            div
+              a.d-inline-block.auth-logo(href='index.html')
+                img(src='images/logo-light.png' alt='' height='20')
+            p.mt-3.fs-15.fw-medium Learn with hasan
+      // end row
+      .row.justify-content-center
+        .col-md-8.col-lg-6.col-xl-5
+          .card.mt-4
+            .card-body.p-4
+              .text-center.mt-2
+                h5.text-primary Welcome Back !
+                if errors
+                    for error, i in errors
+                        div.alert.alert-danger
+                          span  Whoops you made mistake! #{ error }
+              .p-2.mt-4
+                form(action='login', method="post")
+                  .mb-3
+                    label.form-label(for='username') Username
+                    input#username.form-control(type='text' name='username' placeholder='Enter username')
+                  .mb-3
+                    .float-end
+                      a.text-muted(href='auth-pass-reset-basic.html') Forgot password?
+                    label.form-label(for='password-input') Password
+                    .position-relative.auth-pass-inputgroup.mb-3
+                      input#password-input.form-control.pe-5(type='password' name='password' placeholder='Enter password')
+                      button#password-addon.btn.btn-link.position-absolute.end-0.top-0.text-decoration-none.text-muted(type='button')
+                        i.ri-eye-fill.align-middle
+                  .form-check
+                    input#auth-remember-check.form-check-input(type='checkbox' value='')
+                    label.form-check-label(for='auth-remember-check') Remember me
+                  .mt-4
+                    button.btn.btn-success.w-100(type='submit') Sign In
+            // end card body
+            // end card
+      // end row
+      // end container
+      // end auth page content
+// end auth-page-wrapper
+// JAVASCRIPT
+// particles js
+script(src='js/particles.js/particles.js')
+// particles app js
+script(src='js/pages/particles.app.js')
+// password-addon init

@@ -1,0 +1,489 @@
+extends ../app
+block content
+    .container-fluid
+      // start page title
+      .row
+        .col-12
+          .page-title-box.d-sm-flex.align-items-center.justify-content-between
+            h4.mb-sm-0 Horizontal
+            .page-title-right
+              ol.breadcrumb.m-0
+                li.breadcrumb-item
+                  a(href='javascript: void(0);') Layouts
+                li.breadcrumb-item.active Horizontal
+      // end page title
+      .row
+        .col-xxl-5
+          .d-flex.flex-column.h-100
+            .row.h-100
+              .col-12
+                .card
+                  .card-body.p-0
+                    .alert.alert-warning.border-0.rounded-0.m-0.d-flex.align-items-center(role='alert')
+                      i.text-warning.me-2.icon-sm(data-feather='alert-triangle')
+                      .flex-grow-1.text-truncate
+                        | Your free trial expired in 
+                        b 17
+                        |  days.
+                      .flex-shrink-0
+                        a.text-reset.text-decoration-underline(href='pages-pricing.html')
+                          b Upgrade
+                    .row.align-items-end
+                      .col-sm-8
+                        .p-3
+                          p.fs-16.lh-base
+                            | Upgrade your plan from a 
+                            span.fw-semibold Free trial
+                            | , to &lsquo;Premium Plan&rsquo; 
+                            i.mdi.mdi-arrow-right
+                          .mt-3
+                            a.btn.btn-success(href='pages-pricing.html') Upgrade Account!
+                      .col-sm-4
+                        .px-3
+                          img.img-fluid(src='/images/user-illustarator-2.png', alt='')
+                  // end card-body
+              // end col
+            // end row
+            .row
+              .col-md-6
+                .card.card-animate
+                  .card-body
+                    .d-flex.justify-content-between
+                      div
+                        p.fw-medium.text-muted.mb-0 Users
+                        h2.mt-4.ff-secondary.fw-semibold
+                          span.counter-value(data-target='28.05') 0
+                          | k
+                        p.mb-0.text-muted
+                          span.badge.bg-light.text-success.mb-0
+                            i.ri-arrow-up-line.align-middle
+                            |  16.24 %
+                          |  vs. previous month
+                      div
+                        .avatar-sm.flex-shrink-0
+                          span.avatar-title.bg-soft-info.rounded-circle.fs-2
+                            i.text-info(data-feather='users')
+                  // end card body
+                // end card
+              // end col
+              .col-md-6
+                .card.card-animate
+                  .card-body
+                    .d-flex.justify-content-between
+                      div
+                        p.fw-medium.text-muted.mb-0 Sessions
+                        h2.mt-4.ff-secondary.fw-semibold
+                          span.counter-value(data-target='97.66') 0
+                          | k
+                        p.mb-0.text-muted
+                          span.badge.bg-light.text-danger.mb-0
+                            i.ri-arrow-down-line.align-middle
+                            |  3.96 %
+                          |  vs. previous month
+                      div
+                        .avatar-sm.flex-shrink-0
+                          span.avatar-title.bg-soft-info.rounded-circle.fs-2
+                            i.text-info(data-feather='activity')
+                  // end card body
+                // end card
+              // end col
+            // end row
+            .row
+              .col-md-6
+                .card.card-animate
+                  .card-body
+                    .d-flex.justify-content-between
+                      div
+                        p.fw-medium.text-muted.mb-0 Avg. Visit Duration
+                        h2.mt-4.ff-secondary.fw-semibold
+                          span.counter-value(data-target='3') 0
+                          | m
+                          span.counter-value(data-target='40') 0
+                          | sec
+                        p.mb-0.text-muted
+                          span.badge.bg-light.text-danger.mb-0
+                            i.ri-arrow-down-line.align-middle
+                            |  0.24 %
+                          |  vs. previous month
+                      div
+                        .avatar-sm.flex-shrink-0
+                          span.avatar-title.bg-soft-info.rounded-circle.fs-2
+                            i.text-info(data-feather='clock')
+                  // end card body
+                // end card
+              // end col
+              .col-md-6
+                .card.card-animate
+                  .card-body
+                    .d-flex.justify-content-between
+                      div
+                        p.fw-medium.text-muted.mb-0 Bounce Rate
+                        h2.mt-4.ff-secondary.fw-semibold
+                          span.counter-value(data-target='33.48') 0
+                          | %
+                        p.mb-0.text-muted
+                          span.badge.bg-light.text-success.mb-0
+                            i.ri-arrow-up-line.align-middle
+                            |  7.05 %
+                          |  vs. previous month
+                      div
+                        .avatar-sm.flex-shrink-0
+                          span.avatar-title.bg-soft-info.rounded-circle.fs-2
+                            i.text-info(data-feather='external-link')
+                  // end card body
+                // end card
+              // end col
+            // end row
+        // end col
+        .col-xxl-7
+          .row.h-100
+            .col-xl-6
+              .card.card-height-100
+                .card-header.align-items-center.d-flex
+                  h4.card-title.mb-0.flex-grow-1 Live Users By Country
+                  .flex-shrink-0
+                    button.btn.btn-soft-primary.btn-sm(type='button')
+                      | Export Report
+                // end card header
+                // card body
+                .card-body
+                  #users-by-country.text-center(data-colors='["--vz-light"]', style='height: 252px')
+                  .table-responsive.table-card.mt-3
+                    table.table.table-borderless.table-sm.table-centered.align-middle.table-nowrap.mb-1
+                      thead.text-muted.border-dashed.border.border-start-0.border-end-0.bg-soft-light
+                        tr
+                          th Duration (Secs)
+                          th(style='width: 30%;') Sessions
+                          th(style='width: 30%;') Views
+                      tbody.border-0
+                        tr
+                          td 0-30
+                          td 2,250
+                          td 4,250
+                        tr
+                          td 31-60
+                          td 1,501
+                          td 2,050
+                        tr
+                          td 61-120
+                          td 750
+                          td 1,600
+                        tr
+                          td 121-240
+                          td 540
+                          td 1,040
+                // end card body
+              // end card
+            // end col
+            .col-xl-6
+              .card.card-height-100
+                .card-header.align-items-center.d-flex
+                  h4.card-title.mb-0.flex-grow-1 Sessions by Countries
+                  div
+                    button.btn.btn-soft-secondary.btn-sm(type='button')
+                      | ALL
+                    button.btn.btn-soft-primary.btn-sm(type='button')
+                      | 1M
+                    button.btn.btn-soft-secondary.btn-sm(type='button')
+                      | 6M
+                .card-body.p-0
+                  div
+                    #countries_charts.apex-charts(data-colors='["--vz-info", "--vz-info", "--vz-info", "--vz-info", "--vz-danger", "--vz-info", "--vz-info", "--vz-info", "--vz-info", "--vz-info"]', dir='ltr')
+                // end card body
+              // end card
+            // end col
+          // end row
+        // end col
+      // end row
+      .row
+        .col-xl-6
+          .card
+            .card-header.border-0.align-items-center.d-flex
+              h4.card-title.mb-0.flex-grow-1 Audiences Metrics
+              div
+                button.btn.btn-soft-secondary.btn-sm(type='button')
+                  | ALL
+                button.btn.btn-soft-secondary.btn-sm(type='button')
+                  | 1M
+                button.btn.btn-soft-secondary.btn-sm(type='button')
+                  | 6M
+                button.btn.btn-soft-primary.btn-sm(type='button')
+                  | 1Y
+            // end card header
+            .card-header.p-0.border-0.bg-soft-light
+              .row.g-0.text-center
+                .col-6.col-sm-4
+                  .p-3.border.border-dashed.border-start-0
+                    h5.mb-1
+                      span.counter-value(data-target='854') 0
+                      span.text-success.ms-1.fs-12
+                        | 49%
+                        i.ri-arrow-right-up-line.ms-1.align-middle
+                    p.text-muted.mb-0 Avg. Session
+                // end col
+                .col-6.col-sm-4
+                  .p-3.border.border-dashed.border-start-0
+                    h5.mb-1
+                      span.counter-value(data-target='1278') 0
+                      span.text-success.ms-1.fs-12
+                        | 60%
+                        i.ri-arrow-right-up-line.ms-1.align-middle
+                    p.text-muted.mb-0 Conversion Rate
+                // end col
+                .col-6.col-sm-4
+                  .p-3.border.border-dashed.border-start-0.border-end-0
+                    h5.mb-1
+                      span.counter-value(data-target='3') 0
+                      | m
+                      span.counter-value(data-target='40') 0
+                      | sec
+                      span.text-success.ms-1.fs-12
+                        | 37%
+                        i.ri-arrow-right-up-line.ms-1.align-middle
+                    p.text-muted.mb-0 Avg. Session Duration
+                // end col
+            // end card header
+            .card-body.p-0.pb-2
+              div
+                #audiences_metrics_charts.apex-charts(data-colors='["--vz-success", "--vz-gray-300"]', dir='ltr')
+            // end card body
+          // end card
+        // end col
+        .col-xl-6
+          .card.card-height-100
+            .card-header.align-items-center.d-flex
+              h4.card-title.mb-0.flex-grow-1 Audiences Sessions by Country
+              .flex-shrink-0
+                .dropdown.card-header-dropdown
+                  a.text-reset.dropdown-btn(href='#', data-bs-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                    span.fw-semibold.text-uppercase.fs-12 Sort by: 
+                    span.text-muted
+                      | Current Week
+                      i.mdi.mdi-chevron-down.ms-1
+                  .dropdown-menu.dropdown-menu-end
+                    a.dropdown-item(href='#') Today
+                    a.dropdown-item(href='#') Last Week
+                    a.dropdown-item(href='#') Last Month
+                    a.dropdown-item(href='#') Current Year
+            // end card header
+            .card-body.p-0
+              div
+                #audiences-sessions-country-charts.apex-charts(data-colors='["--vz-success", "--vz-info"]', dir='ltr')
+            // end cardbody
+          // end card
+        // end col
+      // end row
+      .row
+        .col-xl-4
+          .card.card-height-100
+            .card-header.align-items-center.d-flex
+              h4.card-title.mb-0.flex-grow-1 Users by Device
+              .flex-shrink-0
+                .dropdown.card-header-dropdown
+                  a.text-reset(href='#', data-bs-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                    span.text-muted.fs-16
+                      i.mdi.mdi-dots-vertical.align-middle
+                  .dropdown-menu.dropdown-menu-end
+                    a.dropdown-item(href='#') Today
+                    a.dropdown-item(href='#') Last Week
+                    a.dropdown-item(href='#') Last Month
+                    a.dropdown-item(href='#') Current Year
+            // end card header
+            .card-body
+              #user_device_pie_charts.apex-charts(data-colors='["--vz-primary", "--vz-warning", "--vz-info"]', dir='ltr')
+              .table-responsive.mt-3
+                table.table.table-borderless.table-sm.table-centered.align-middle.table-nowrap.mb-0
+                  tbody.border-0
+                    tr
+                      td
+                        h4.text-truncate.fs-14.fs-medium.mb-0
+                          i.ri-stop-fill.align-middle.fs-18.text-primary.me-2
+                          | Desktop Users
+                      td
+                        p.text-muted.mb-0
+                          i.me-2.icon-sm(data-feather='users')
+                          | 78.56k
+                      td.text-end
+                        p.text-success.fw-medium.fs-12.mb-0
+                          i.ri-arrow-up-s-fill.fs-5.align-middle
+                          | 2.08%
+                    tr
+                      td
+                        h4.text-truncate.fs-14.fs-medium.mb-0
+                          i.ri-stop-fill.align-middle.fs-18.text-warning.me-2
+                          | Mobile Users
+                      td
+                        p.text-muted.mb-0
+                          i.me-2.icon-sm(data-feather='users')
+                          | 105.02k
+                      td.text-end
+                        p.text-danger.fw-medium.fs-12.mb-0
+                          i.ri-arrow-down-s-fill.fs-5.align-middle
+                          | 10.52%
+                    tr
+                      td
+                        h4.text-truncate.fs-14.fs-medium.mb-0
+                          i.ri-stop-fill.align-middle.fs-18.text-info.me-2
+                          | Tablet Users
+                      td
+                        p.text-muted.mb-0
+                          i.me-2.icon-sm(data-feather='users')
+                          | 42.89k
+                      td.text-end
+                        p.text-danger.fw-medium.fs-12.mb-0
+                          i.ri-arrow-down-s-fill.fs-5.align-middle
+                          | 7.36%
+            // end card body
+          // end card
+        // end col
+        .col-xl-4.col-md-6
+          .card.card-height-100
+            .card-header.align-items-center.d-flex
+              h4.card-title.mb-0.flex-grow-1 Top Referrals Pages
+              .flex-shrink-0
+                button.btn.btn-soft-primary.btn-sm(type='button')
+                  | Export Report
+            .card-body
+              .row.align-items-center
+                .col-6
+                  h6.text-muted.text-uppercase.fw-semibold.text-truncate.fs-12.mb-3 Total Referrals Page
+                  h4.fs-.mb-0 725,800
+                  p.mb-0.mt-2.text-muted
+                    span.badge.badge-soft-success.mb-0
+                      i.ri-arrow-up-line.align-middle
+                      |  15.72 %
+                    |  vs. previous month
+                // end col
+                .col-6
+                  .text-center
+                    img.img-fluid(src='/images/illustrator-1.png', alt='')
+                // end col
+              // end row
+              .mt-3.pt-2
+                .progress.progress-lg.rounded-pill
+                  .progress-bar.bg-primary(role='progressbar', style='width: 25%', aria-valuenow='25', aria-valuemin='0', aria-valuemax='100')
+                  .progress-bar.bg-info(role='progressbar', style='width: 18%', aria-valuenow='18', aria-valuemin='0', aria-valuemax='100')
+                  .progress-bar.bg-success(role='progressbar', style='width: 22%', aria-valuenow='22', aria-valuemin='0', aria-valuemax='100')
+                  .progress-bar.bg-warning(role='progressbar', style='width: 16%', aria-valuenow='16', aria-valuemin='0', aria-valuemax='100')
+                  .progress-bar.bg-danger(role='progressbar', style='width: 19%', aria-valuenow='19', aria-valuemin='0', aria-valuemax='100')
+              // end
+              .mt-3.pt-2
+                .d-flex.mb-2
+                  .flex-grow-1
+                    p.text-truncate.text-muted.fs-14.mb-0
+                      i.mdi.mdi-circle.align-middle.text-primary.me-2
+                      | www.google.com
+                  .flex-shrink-0
+                    p.mb-0 24.58%
+                // end
+                .d-flex.mb-2
+                  .flex-grow-1
+                    p.text-truncate.text-muted.fs-14.mb-0
+                      i.mdi.mdi-circle.align-middle.text-info.me-2
+                      | www.youtube.com
+                  .flex-shrink-0
+                    p.mb-0 17.51%
+                // end
+                .d-flex.mb-2
+                  .flex-grow-1
+                    p.text-truncate.text-muted.fs-14.mb-0
+                      i.mdi.mdi-circle.align-middle.text-success.me-2
+                      | www.meta.com
+                  .flex-shrink-0
+                    p.mb-0 23.05%
+                // end
+                .d-flex.mb-2
+                  .flex-grow-1
+                    p.text-truncate.text-muted.fs-14.mb-0
+                      i.mdi.mdi-circle.align-middle.text-warning.me-2
+                      | www.medium.com
+                  .flex-shrink-0
+                    p.mb-0 12.22%
+                // end
+                .d-flex
+                  .flex-grow-1
+                    p.text-truncate.text-muted.fs-14.mb-0
+                      i.mdi.mdi-circle.align-middle.text-danger.me-2
+                      | Other
+                  .flex-shrink-0
+                    p.mb-0 17.58%
+                // end
+              // end
+              .mt-2.text-center
+                a.text-muted.text-decoration-underline(href='javascript:void(0);') Show All
+            // end card body
+          // end card
+        // end col
+        .col-xl-4.col-md-6
+          .card.card-height-100
+            .card-header.align-items-center.d-flex
+              h4.card-title.mb-0.flex-grow-1 Top Pages
+              .flex-shrink-0
+                .dropdown.card-header-dropdown
+                  a.text-reset(href='#', data-bs-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                    span.text-muted.fs-16
+                      i.mdi.mdi-dots-vertical.align-middle
+                  .dropdown-menu.dropdown-menu-end
+                    a.dropdown-item(href='#') Today
+                    a.dropdown-item(href='#') Last Week
+                    a.dropdown-item(href='#') Last Month
+                    a.dropdown-item(href='#') Current Year
+            // end card header
+            .card-body
+              .table-responsive.table-card
+                table.table.align-middle.table-borderless.table-centered.table-nowrap.mb-0
+                  thead.text-muted.table-light
+                    tr
+                      th(scope='col', style='width: 62;') Active Page
+                      th(scope='col') Active
+                      th(scope='col') Users
+                  tbody
+                    tr
+                      td
+                        a(href='javascript:void(0);') /themesbrand/skote-25867
+                      td 99
+                      td 25.3%
+                    // end
+                    tr
+                      td
+                        a(href='javascript:void(0);') /dashonic/chat-24518
+                      td 86
+                      td 22.7%
+                    // end
+                    tr
+                      td
+                        a(href='javascript:void(0);') /skote/timeline-27391
+                      td 64
+                      td 18.7%
+                    // end
+                    tr
+                      td
+                        a(href='javascript:void(0);') /themesbrand/minia-26441
+                      td 53
+                      td 14.2%
+                    // end
+                    tr
+                      td
+                        a(href='javascript:void(0);') /dashon/dashboard-29873
+                      td 33
+                      td 12.6%
+                    // end
+                    tr
+                      td
+                        a(href='javascript:void(0);') /doot/chats-29964
+                      td 20
+                      td 10.9%
+                    // end
+                    tr
+                      td
+                        a(href='javascript:void(0);') /minton/pages-29739
+                      td 10
+                      td 07.3%
+                    // end
+                  // end tbody
+                // end table
+              // end
+            // end cardbody
+          // end card
+        // end col
+      // end row

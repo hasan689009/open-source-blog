@@ -1,0 +1,75 @@
+.app-menu.navbar-menu
+  // LOGO
+  .navbar-brand-box
+    // Dark Logo
+    a.logo.logo-dark(href='index.html')
+      span.logo-sm
+        img(src='/images/logo-sm.png', alt='', height='22')
+      span.logo-lg
+        img(src='/images/logo-dark.png', alt='', height='17')
+    // Light Logo
+    a.logo.logo-light(href='index.html')
+      span.logo-sm
+        img(src='/images/logo-sm.png', alt='', height='22')
+      span.logo-lg
+        img(src='/images/logo-light.png', alt='', height='17')
+    button#vertical-hover.btn.btn-sm.p-0.fs-20.header-item.float-end.btn-vertical-sm-hover(type='button')
+      i.ri-record-circle-line
+  #scrollbar
+    .container-fluid
+      #two-column-menu
+      ul#navbar-nav.navbar-nav
+        li.menu-title
+          span(data-key='t-menu') Menu
+        li.nav-item
+          a.nav-link(href='/admin', aria-controls='sidebarDashboards')
+            i.ri-dashboard-2-line
+            |  
+            span(data-key='t-dashboards') Dashboards
+
+        // end Dashboard Menu
+        li.nav-item
+          a.nav-link.menu-link(href='#sidebarApps', data-bs-toggle='collapse', role='button', aria-expanded='false', aria-controls='sidebarApps')
+            i.ri-apps-2-line
+            |  
+            span(data-key='t-apps') Apps
+          #sidebarApps.collapse.menu-dropdown
+            ul.nav.nav-sm.flex-column
+              li.nav-item
+                a.nav-link(href='/categories', data-key='t-calendar')  Categories 
+              li.nav-item
+                a.nav-link(href='apps-chat.html', data-key='t-chat')  Tag 
+
+              li.nav-item
+                a.nav-link(href='#sidebarEcommerce', data-bs-toggle='collapse', role='button', aria-expanded='false', aria-controls='sidebarEcommerce', data-key='t-ecommerce')
+                  | Report
+
+        // end Dashboard Menu
+        li.menu-title
+          i.ri-more-fill
+          |  
+          span(data-key='t-pages') Pages
+
+
+
+        li.menu-title
+          i.ri-more-fill
+          |  
+          span(data-key='t-components') Components
+
+
+        li.nav-item
+          a.nav-link.menu-link(href='widgets.html')
+            i.ri-honour-line
+            |  
+            span(data-key='t-widgets') Posts
+        li.nav-item
+          a.nav-link.menu-link(href='/users')
+            i.ri-honour-line
+            |  
+            span(data-key='t-widgets') Users
+
+
+
+    // Sidebar
+  .sidebar-background

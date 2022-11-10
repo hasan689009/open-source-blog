@@ -1,0 +1,38 @@
+doctype html
+html(lang='en', data-layout='horizontal', data-layout-style='', data-layout-position='fixed', data-topbar='light')
+  head
+    meta(charset='utf-8')
+    title #{title ? title : 'Learn with hasan'}
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(content='Premium Multipurpose Admin & Dashboard Template', name='description')
+    meta(content='Themesbrand', name='author')
+    link(rel='shortcut icon', href='/images/favicon.ico')
+    script(src='/js/layout.js')
+    link(href='/css/bootstrap.min.css', rel='stylesheet', type='text/css')
+    link(href='/css/icons.min.css', rel='stylesheet', type='text/css')
+    link(href='/css/app.min.css', rel='stylesheet', type='text/css')
+  body
+    #layout-wrapper
+      include layouts/header
+      include layouts/menu
+      .vertical-overlay
+      // ==============================================================
+      // Start right Content here
+      // ==============================================================
+      .main-content
+        .page-content
+          block content
+        footer.footer
+          .container-fluid
+            .row
+              .col-sm-6
+                script.
+                  document.write(new Date().getFullYear())
+                |  &copy; Velzon.
+              .col-sm-6
+                .text-sm-end.d-none.d-sm-block
+                  | Design &amp; Develop by Themesbrand
+    script(src='/js/libs/bootstrap/js/bootstrap.bundle.min.js')
+    script(src='/js/libs/node-waves/waves.min.js')
+    script(src='/js/libs/feather-icons/feather.min.js')
+    script(src='/js/app.js')
