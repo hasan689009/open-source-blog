@@ -4,8 +4,6 @@ const passport = require('passport');
 const authController = require('../controllers/authController');
 
 router.get('/login', (req, res, next) => {
-    console.log('Hasan1.1');
-    console.log(req.user);
     if(req.user)
     {
         res.redirect('/admin');

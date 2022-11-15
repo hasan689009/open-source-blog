@@ -7,7 +7,9 @@
     "watch": "nodemon ./bin/www"
   },
   "dependencies": {
+    "connect-ensure-login": "^0.1.1",
     "connect-flash": "^0.1.1",
+    "connect-mongo": "^4.6.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^16.0.3",
@@ -15,7 +17,11 @@
     "express-session": "^1.17.3",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
+    "jquery": "^3.6.1",
+    "jsdom": "^20.0.2",
     "mongoose": "^6.7.2",
+    "mongoose-paginate": "^5.0.3",
+    "mongoose-paginate-v2": "^1.7.1",
     "morgan": "~1.9.1",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
@@ -23,5 +29,18 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
-  }
+  },
+  "description": "Blogging application with Node Js",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hasan689009/open-source-blog.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hasan689009/open-source-blog/issues"
+  },
+  "homepage": "https://github.com/hasan689009/open-source-blog#readme"
 }

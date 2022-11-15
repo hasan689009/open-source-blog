@@ -7,9 +7,12 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const passport = require('passport');
+const connectEnsureLogin = require('connect-ensure-login');// authorization
 const LocalStrategy = require('passport-local');
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const flash = require('connect-flash');
+
 
 // router load
 const indexRouter = require('./routes/index');
@@ -32,12 +35,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use(session({
-  cookie:{_expires : 60000000},
+  cookie: { maxAge: 60 * 60 * 1000 },
   secret: 'woot',
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: true,
+  store: MongoStore.create({ mongoUrl: 'mongodb://root:root@localhost:27017/blog?authMechanism=DEFAULT&authSource=admin' })
 }));
 app.use(flash());
 app.use((req, res, next) => {
@@ -48,7 +51,8 @@ app.use((req, res, next) => {
 
 
 //authentication
-app.use(session({secret: 'whatever can input', resave: true, saveUninitialized: true}));
+
+// app.use(session({secret: 'whatever can input', resave: true, saveUninitialized: true}));
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(authController.strategy));
@@ -66,6 +70,7 @@ app.use('/admin', authController.authorize() ,adminRouter);
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
 
 
 // Error Handler

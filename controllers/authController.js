@@ -31,33 +31,22 @@ class auth {
         });
     }
 
-    static authorize = () => {
-        return (req, res, next) => {
-            if(req.user){
-                next();
+    static authorize (){
+        return  function (req, res, next){
+            if(req.isAuthenticated())
+            {
+                var _send = res.send;
+                var sent = false;
+                res.send = function(data){
+                    if(sent) return;
+                    _send.bind(res)(data);
+                    sent = true;
+                };
+                 next();
             }else{
                 res.redirect('/login');
             }
         }
     }
-
-    // static logout = () =>{
-        
-    //     return (req, res, next) => {
-            
-    //         req.user = null;
-    //         if(req.user){
-    //             console.log('Hasan');
-    //             next();
-    //         }
-    //         else{
-    //             console.log('Salam');
-    //             res.redirect('/login');
-    //         }
-    //     }
-    // }
-
-
-    
 }
 module.exports = auth;
