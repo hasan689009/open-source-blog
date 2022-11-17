@@ -56,11 +56,16 @@ block content
                                             i.ri-delete-bin-2-line
                                 .col-sm
                                     .d-flex.justify-content-sm-end
-                                        .search-box.ms-2
-                                            input.form-control.search(type='text' placeholder='Search...')
-                                            i.ri-search-line.search-icon
-                                        button.btn.btn-success
-                                            |Search
+                                        form(action="users" method="get" class="d-flex")
+                                            .search-box.ms-2
+                                                input.form-control.search(type='text' value=`${reqData.search ? reqData.search:''}` name='search'  placeholder='Search username...')
+                                                i.ri-search-line.search-icon
+                                            button.btn.btn-success
+                                                |Search
+                                        form(action="users" method="get" class="d-flex")
+                                            button.btn.btn-warning
+                                                |Reset filter
+
                             .table-responsive.table-card.mt-3.mb-1
                                 table#customerTable.table.align-middle.table-nowrap
                                     thead.table-light
@@ -114,4 +119,3 @@ block content
                                                     else
                                                         li
                                                             a.page(href="?page="+n)=n++
-                                    
