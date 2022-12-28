@@ -8,40 +8,78 @@ block content
                         h4.card-title.mb-0 #{title}
                     // end card header
                     .card-body
+                        include ../../layouts/message
                         #showModal.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
                             .modal-dialog.modal-dialog-centered
                                 .modal-content
                                     .modal-header.bg-light.p-3
                                         h5#exampleModalLabel.modal-title
+                                            |Add new user
                                         button#close-modal.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
-                                    form
+                                    form(action="/admin/users" method="post")
                                         .modal-body
                                             #modal-id.mb-3(style='display: none;')
                                                 label.form-label(for='id-field') ID
                                                 input#id-field.form-control(type='text' placeholder='ID' readonly='')
                                             .mb-3
-                                                label.form-label(for='customername-field') Customer Name
-                                                input#customername-field.form-control(type='text' placeholder='Enter Name' required='')
+                                                label.form-label(for='customername-field') Name
+                                                input#customername-field.form-control(type='text' name='name' placeholder='Enter Name')
                                             .mb-3
-                                                label.form-label(for='email-field') Email
-                                                input#email-field.form-control(type='email' placeholder='Enter Email' required='')
+                                                label.form-label(for='email-field') User Name
+                                                input#email-field.form-control(type='text' name='username' placeholder='Enter username')
                                             .mb-3
-                                                label.form-label(for='phone-field') Phone
-                                                input#phone-field.form-control(type='text' placeholder='Enter Phone no.' required='')
+                                                label.form-label(for='phone-field') password
+                                                input#phone-field.form-control(type='password' name='password' placeholder='Enter password.')
                                             .mb-3
-                                                label.form-label(for='date-field') Joining Date
-                                                input#date-field.form-control(type='text' placeholder='Select Date' required='')
+                                                label.form-label(for='date-field') Confirm password
+                                                input#date-field.form-control(type='text' name='confirm_password' placeholder='ENter password')
                                             div
                                                 label.form-label(for='status-field') Status
-                                                select#status-field.form-control(data-trigger='' name='status-field')
+                                                select#status-field.form-control(data-trigger='' name='status')
                                                     option(value='') Status
-                                                    option(value='Active') Active
-                                                    option(value='Block') Block
+                                                    option(value='1') Active
+                                                    option(value='0') Block
                                             .modal-footer
                                                 .hstack.gap-2.justify-content-end
                                                     button.btn.btn-light(type='button' data-bs-dismiss='modal') Close
-                                                    button#add-btn.btn.btn-success(type='submit') Add Customer
-                                                    button#edit-btn.btn.btn-success(type='button') Update
+                                                    button#edit-btn.btn.btn-success(type='submit') Save
+
+
+
+                        #editModal.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
+                            .modal-dialog.modal-dialog-centered
+                                .modal-content
+                                    .modal-header.bg-light.p-3
+                                        h5#exampleModalLabel.modal-title
+                                            |Edit new user
+                                        button#close-modal.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+                                    form(action="/admin/users" name='editModal' method="post" enctype="application/x-www-form-urlencoded")
+                                        .modal-body
+                                            #modal-id.mb-3(style='display: none;')
+                                                label.form-label(for='id-field') ID
+                                                input#id-field.form-control(type='text' placeholder='ID' readonly='')
+                                            .mb-3
+                                                label.form-label(for='customername-field') Name
+                                                input#customername-field.form-control.name(type='text' name='name' placeholder='Enter Name')
+                                            .mb-3
+                                                label.form-label(for='email-field') User Name
+                                                input#email-field.form-control.username(type='text' name='username' placeholder='Enter username')
+                                            .mb-3
+                                                label.form-label(for='phone-field') password
+                                                input#phone-field.form-control.password(type='password' name='password' placeholder='Enter password.')
+                                            .mb-3
+                                                label.form-label(for='date-field') Confirm password
+                                                input#date-field.form-control.confirm_password(type='text' name='confirm_password' placeholder='ENter password')
+                                            div
+                                                label.form-label(for='status-field') Status
+                                                select#status-field.form-control.status(data-trigger='' name='status')
+                                                    option(value='') Status
+                                                    option(value='1') Active
+                                                    option(value='0') Block
+                                            .modal-footer
+                                                .hstack.gap-2.justify-content-end
+                                                    button.btn.btn-light(type='button' data-bs-dismiss='modal') Close
+                                                    button#edit-btn.btn.btn-success(type='submit') Save
 
 
 
@@ -95,9 +133,10 @@ block content
                                                 td
                                                     .d-flex.gap-2
                                                         .edit
-                                                            button.btn.btn-sm.btn-success.edit-item-btn(data-bs-toggle='modal' data-bs-target='#showModal') Edit
+                                                            button.btn.btn-sm.btn-success.edit-item-btn.edit-item(data-bs-toggle='modal' data-id=user.id data-bs-target='#editModal') Edit
                                                         .remove
-                                                            button.btn.btn-sm.btn-danger.remove-item-btn(data-bs-toggle='modal' data-bs-target='#deleteRecordModal') Remove
+                                                            a.btn.btn-sm.btn-danger.remove-item-btn(href='/admin/user/'+user._id onclick="event.preventDefault(); document.getElementById('delete-form"+user.id+"').submit();") Delete
+                                                            form(id='delete-form'+user.id action='/admin/user/'+user._id+'?_method=DELETE'  method='POST' style='display: none;')
 
                                 .noresult(style='display: none')
                                     .text-center
@@ -119,3 +158,22 @@ block content
                                                     else
                                                         li
                                                             a.page(href="?page="+n)=n++
+    script.
+      $(document).ready(function(){
+            $('.edit-item').click(function(){
+                let id = $(this).attr('data-id');
+                let URL = '/admin/user/' + id;
+                let user = getById(URL);
+                let form = $('form[name="editModal"]');
+                if (user && form)
+                {
+                    form.find('.name').val(user.name);
+                    form.find('.username').val(user.username);
+                    form.find('.status').val(user.status ? 1 : 0);
+                    form.attr('action', '/admin/user/'+ user._id+'?_method=PATCH');
+                    console.log(user);
+                }
+            });
+      });
+
+

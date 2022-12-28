@@ -12,8 +12,7 @@ const LocalStrategy = require('passport-local');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const flash = require('connect-flash');
-
-
+const methodOverride = require('method-override')
 // router load
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
@@ -30,6 +29,10 @@ app.use(require('body-parser').urlencoded({ extended: true }));
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+
+app.use(methodOverride('_method'));
+
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -66,11 +69,11 @@ app.use('/admin', authController.authorize() ,adminRouter);
 
 
 
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
-
 
 
 // Error Handler

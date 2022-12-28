@@ -9,5 +9,8 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/users', userController.index);
-
+router.post('/users', userController.create);
+router.get('/user/:id', userController.getById);
+router.patch('/user/:id', userController.update);
+router.delete('/user/:id', userController.delete);
 module.exports = router;
