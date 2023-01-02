@@ -65,5 +65,9 @@ class categoriesController{
         }
         res.redirect('back');
     }
+
+    static async getAll(req, res) {
+        return categoriesModel.find();
+    }
 }
 module.exports = categoriesController;

@@ -1,0 +1,66 @@
+extends ../../app
+block content
+    .container-fluid
+        .row
+            .col-lg-12
+                .card
+                    .card-header
+                        h4.card-title.mb-0 #{title}
+                    // end card header
+                    .card-body
+                        include ../../layouts/message
+                        form(action="/admin/post" method="post" enctype="multipart/form-data")
+                            div.row
+                                div.col-sm-6
+                                    .mb-3
+                                        label.form-label(for='customername-field') Title
+                                        input#customername-field.form-control(type='text' name='title' placeholder='Enter post title')
+
+                                    .mb-3
+                                        label.form-label(for='status-field') Category
+                                        select#status-field.form-control(data-choices data-trigger='' name='category')
+                                            option(value='') Status
+                                            each category in categories
+                                                option(value=category._id)=category.name
+                                    .mb-3
+                                        label.form-label(for='status-field') Status
+                                        select#status-field.form-control(data-trigger='' name='status')
+                                            option(value='') Status
+                                            option(value='1') Publish
+                                            option(value='0') Draft
+                                div.col-sm-6
+                                    p.text-muted
+                                    | Upload Thumbnail.
+                                    .dropzone.dz-clickable
+                                        .dz-message.needsclick.text-center
+                                            .mb-3(style="font-size:12px")
+                                                i.display-4.text-muted.ri-upload-cloud-2-fill
+                                                h4 click to upload.
+                                                input(type="file" name='thumb')
+                                        ul#dropzone-preview.list-unstyled.mb-0
+                            div.row
+                                div.col-sm-12
+                                    textarea.form-control#editor(name="details", cols="30", rows="10")
+
+                            div.row(style="text-align:right")
+                                div.col-sm-12
+                                    button#edit-btn.btn.btn-success(type='submit') Save
+    script.
+      $(document).ready(function(){
+            $('.edit-item').click(function(){
+                let id = $(this).attr('data-id');
+                let URL = '/admin/category/' + id;
+                let category = getById(URL);
+                let form = $('form[name="editModal"]');
+                if (category && form)
+                {
+                    form.find('.name').val(category.name);
+                    form.find('.status').val(category.status ? 1 : 0);
+                    form.attr('action', '/admin/category/'+ category._id+'?_method=PATCH');
+                }
+            });
+
+            CKEDITOR.replace( 'editor');
+      });
+
+

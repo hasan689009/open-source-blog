@@ -17,6 +17,7 @@ const methodOverride = require('method-override')
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 const adminRouter = require('./routes/admin');
+const fileUpload = require('express-fileupload');
 
 // controller load
 const authController = require('./controllers/authController');
@@ -31,7 +32,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 app.use(methodOverride('_method'));
-
+app.use(fileUpload());
 
 app.use(logger('dev'));
 app.use(express.json());

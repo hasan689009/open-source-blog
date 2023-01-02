@@ -1,0 +1,163 @@
+extends ../../app
+block content
+    .container-fluid
+        .row
+            .col-lg-12
+                .card
+                    .card-header
+                        h4.card-title.mb-0 #{title}
+                    // end card header
+                    .card-body
+                        include ../../layouts/message
+                        #showModal.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
+                            .modal-dialog.modal-dialog-centered
+                                .modal-content
+                                    .modal-header.bg-light.p-3
+                                        h5#exampleModalLabel.modal-title
+                                            |Add new post
+                                        button#close-modal.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+                                    form(action="/admin/post" method="post")
+                                        .modal-body
+                                            #modal-id.mb-3(style='display: none;')
+                                                label.form-label(for='id-field') ID
+                                                input#id-field.form-control(type='text' placeholder='ID' readonly='')
+                                            .mb-3
+                                                label.form-label(for='customername-field') Title
+                                                input#customername-field.form-control(type='text' name='title' placeholder='Enter post title')
+
+                                            .mb-3
+                                                label.form-label(for='customername-field') Description
+                                                textarea#editor.form-control(name='editor')
+
+
+                                            .mb-3
+                                                label.form-label(for='status-field') Status
+                                                select#status-field.form-control(data-trigger='' name='status')
+                                                    option(value='') Status
+                                                    option(value='1') Active
+                                                    option(value='0') DeActive
+                                            .modal-footer
+                                                .hstack.gap-2.justify-content-end
+                                                    button.btn.btn-light(type='button' data-bs-dismiss='modal') Close
+                                                    button#edit-btn.btn.btn-success(type='submit') Save
+
+
+
+                        #editModal.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
+                            .modal-dialog.modal-dialog-centered
+                                .modal-content
+                                    .modal-header.bg-light.p-3
+                                        h5#exampleModalLabel.modal-title
+                                            |Edit new categories
+                                        button#close-modal.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+                                    form(action="/admin/category" name='editModal' method="post" enctype="application/x-www-form-urlencoded")
+                                        .modal-body
+                                            #modal-id.mb-3(style='display: none;')
+                                                label.form-label(for='id-field') ID
+                                                input#id-field.form-control(type='text' placeholder='ID' readonly='')
+                                            .mb-3
+                                                label.form-label(for='customername-field') Name
+                                                input#customername-field.form-control.name(type='text' name='name' placeholder='Enter Name')
+                                            .mb-3
+                                                label.form-label(for='status-field') Status
+                                                select#status-field.form-control.status(data-trigger='' name='status')
+                                                    option(value='') Status
+                                                    option(value='1') Active
+                                                    option(value='0') De Active
+                                            .modal-footer
+                                                .hstack.gap-2.justify-content-end
+                                                    button.btn.btn-light(type='button' data-bs-dismiss='modal') Close
+                                                    button#edit-btn.btn.btn-success(type='submit') Save
+
+
+
+                        #customerList
+                            .row.g-4.mb-3
+                                .col-sm-auto
+                                    div
+                                        a.btn.btn-success.add-btn(href='/admin/post/create') Add
+                                        button.btn.btn-soft-danger(onclick='deleteMultiple()')
+                                            i.ri-delete-bin-2-line
+                                .col-sm
+                                    .d-flex.justify-content-sm-end
+                                        form(action="categories" method="get" class="d-flex")
+                                            .search-box.ms-2
+                                                input.form-control.search(type='text' value=`${reqData.search ? reqData.search:''}` name='search'  placeholder='Search username...')
+                                                i.ri-search-line.search-icon
+                                            button.btn.btn-success
+                                                |Search
+                                        form(action="categories" method="get" class="d-flex")
+                                            button.btn.btn-warning
+                                                |Reset filter
+
+                            .table-responsive.table-card.mt-3.mb-1
+                                table#customerTable.table.align-middle.table-nowrap
+                                    thead.table-light
+                                        tr
+                                            th(scope='col' style='width: 50px;')
+                                                .form-check
+                                                    input#checkAll.form-check-input(type='checkbox' value='option')
+                                            th.sort(data-sort='name') Categories Name
+                                            th.sort(data-sort='phone') status
+                                            th.sort(data-sort='action') Action
+                                    tbody.list.form-check-all
+                                        each category in categories
+                                            tr
+                                                th(scope='row')
+                                                    .form-check
+                                                        input.form-check-input(type='checkbox' name='chk_child' value='option1')
+                                                td.id(style='display:none;')
+                                                    a.fw-medium.link-primary(href='javascript:void(0);') #VZ2101
+                                                td=category.name
+                                                td
+                                                    if category.status == 1
+                                                        span.badge.badge-soft-success.text-uppercase Active
+                                                    else
+                                                        span.badge.badge-soft-danger.text-uppercase Deactivate
+                                                td
+                                                    .d-flex.gap-2
+                                                        .edit
+                                                            button.btn.btn-sm.btn-success.edit-item-btn.edit-item(data-bs-toggle='modal' data-id=category.id data-bs-target='#editModal') Edit
+                                                        .remove
+                                                            a.btn.btn-sm.btn-danger.remove-item-btn(href='/admin/category/'+category._id onclick="event.preventDefault(); document.getElementById('delete-form"+category.id+"').submit();") Delete
+                                                            form(id='delete-form'+category.id action='/admin/category/'+category._id+'?_method=DELETE'  method='POST' style='display: none;')
+
+                                .noresult(style='display: none')
+                                    .text-center
+                                        lord-icon(src='https://cdn.lordicon.com/msoeawqm.json' trigger='loop' colors='primary:#121331,secondary:#08a88a' style='width:75px;height:75px')
+                                        h5.mt-2 Sorry! No Result Found
+                                        p.text-muted.mb-0 We&apos;ve searched more than 150+ Orders We did not find any orders for you search.
+                            .d-flex.justify-content-end
+                                .col-sm-5
+                                    #example_info.dataTables_info(role='status' aria-live='polite') Showing #{paging_counter} to #{(paging_counter + categories.length) - 1} of #{total_docs} entries
+                                .col-sm-7
+                                    if page_count != 1
+                                        .pagination-wrap.hstack.gap-2.align-right
+                                            ul.pagination.listjs-pagination
+                                                - var n = 1;
+                                                while n < page_count+1
+                                                    if n == current_page
+                                                        li.active
+                                                            a.page(href="?page="+n)=n++
+                                                    else
+                                                        li
+                                                            a.page(href="?page="+n)=n++
+    script.
+      $(document).ready(function(){
+            $('.edit-item').click(function(){
+                let id = $(this).attr('data-id');
+                let URL = '/admin/category/' + id;
+                let category = getById(URL);
+                let form = $('form[name="editModal"]');
+                if (category && form)
+                {
+                    form.find('.name').val(category.name);
+                    form.find('.status').val(category.status ? 1 : 0);
+                    form.attr('action', '/admin/category/'+ category._id+'?_method=PATCH');
+                }
+            });
+
+            CKEDITOR.replace( 'editor');
+      });
+
+
