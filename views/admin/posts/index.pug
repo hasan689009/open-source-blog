@@ -80,13 +80,13 @@ block content
                                             i.ri-delete-bin-2-line
                                 .col-sm
                                     .d-flex.justify-content-sm-end
-                                        form(action="categories" method="get" class="d-flex")
+                                        form(action="post" method="get" class="d-flex")
                                             .search-box.ms-2
                                                 input.form-control.search(type='text' value=`${reqData.search ? reqData.search:''}` name='search'  placeholder='Search username...')
                                                 i.ri-search-line.search-icon
                                             button.btn.btn-success
                                                 |Search
-                                        form(action="categories" method="get" class="d-flex")
+                                        form(action="post" method="get" class="d-flex")
                                             button.btn.btn-warning
                                                 |Reset filter
 
@@ -97,30 +97,36 @@ block content
                                             th(scope='col' style='width: 50px;')
                                                 .form-check
                                                     input#checkAll.form-check-input(type='checkbox' value='option')
-                                            th.sort(data-sort='name') Categories Name
+                                            th.sort(data-sort='Thumbnail') Thumbnail
+                                            th.sort(data-sort='categories name') Categories name
+                                            th.sort(data-sort='name') Title
                                             th.sort(data-sort='phone') status
                                             th.sort(data-sort='action') Action
                                     tbody.list.form-check-all
-                                        each category in categories
+                                        each post in posts
                                             tr
                                                 th(scope='row')
                                                     .form-check
                                                         input.form-check-input(type='checkbox' name='chk_child' value='option1')
-                                                td.id(style='display:none;')
-                                                    a.fw-medium.link-primary(href='javascript:void(0);') #VZ2101
-                                                td=category.name
+                                                td(style="width:14%")
+                                                    if post.fileName
+                                                        img(src="/images/posts/"+post._id+'.jpg', alt="" style="width: 100%;border: #def1ef 1px solid;border-radius: 10px;")
+                                                    else
+                                                        | No Thumbnail Found
+                                                td=post.categoryId.name
+                                                td=post.title
                                                 td
-                                                    if category.status == 1
+                                                    if post.status == 1
                                                         span.badge.badge-soft-success.text-uppercase Active
                                                     else
                                                         span.badge.badge-soft-danger.text-uppercase Deactivate
                                                 td
                                                     .d-flex.gap-2
                                                         .edit
-                                                            button.btn.btn-sm.btn-success.edit-item-btn.edit-item(data-bs-toggle='modal' data-id=category.id data-bs-target='#editModal') Edit
+                                                            button.btn.btn-sm.btn-success.edit-item-btn.edit-item(data-bs-toggle='modal' data-id=post.id data-bs-target='#editModal') Edit
                                                         .remove
-                                                            a.btn.btn-sm.btn-danger.remove-item-btn(href='/admin/category/'+category._id onclick="event.preventDefault(); document.getElementById('delete-form"+category.id+"').submit();") Delete
-                                                            form(id='delete-form'+category.id action='/admin/category/'+category._id+'?_method=DELETE'  method='POST' style='display: none;')
+                                                            a.btn.btn-sm.btn-danger.remove-item-btn(href='/admin/category/'+post._id onclick="event.preventDefault(); document.getElementById('delete-form"+post.id+"').submit();") Delete
+                                                            form(id='delete-form'+post.id action='/admin/category/'+post._id+'?_method=DELETE'  method='POST' style='display: none;')
 
                                 .noresult(style='display: none')
                                     .text-center
@@ -129,7 +135,7 @@ block content
                                         p.text-muted.mb-0 We&apos;ve searched more than 150+ Orders We did not find any orders for you search.
                             .d-flex.justify-content-end
                                 .col-sm-5
-                                    #example_info.dataTables_info(role='status' aria-live='polite') Showing #{paging_counter} to #{(paging_counter + categories.length) - 1} of #{total_docs} entries
+                                    #example_info.dataTables_info(role='status' aria-live='polite') Showing #{paging_counter} to #{(paging_counter + posts.length) - 1} of #{total_docs} entries
                                 .col-sm-7
                                     if page_count != 1
                                         .pagination-wrap.hstack.gap-2.align-right

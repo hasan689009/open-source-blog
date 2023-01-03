@@ -18,8 +18,8 @@ block content
 
                                     .mb-3
                                         label.form-label(for='status-field') Category
-                                        select#status-field.form-control(data-choices data-trigger='' name='category')
-                                            option(value='') Status
+                                        select#status-field.form-control(data-choices data-trigger='' name='categoryId')
+                                            option(value='') Category
                                             each category in categories
                                                 option(value=category._id)=category.name
                                     .mb-3

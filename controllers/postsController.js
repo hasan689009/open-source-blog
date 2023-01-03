@@ -4,44 +4,33 @@ const postsModel = require("../models/postsModel");
 const categoriesController = require("./categoriesController");
 
 class postsController{
-    static  index(req, res)
+    static async index(req, res)
     {
-        res.render('admin/posts/index.pug', {
-            'title': 'Posts List',
-            success_message: req.flash('success_message'),
-            error_message: req.flash('error_message'),
-            categories: {},
-            reqData: {},
-            paging_counter: 10,
-            limit: 10,
-            total_docs: 100,
-            page_count: 2,
-            current_page: 1,
+        const page = req.query.page;
+        const query = {};
+        if (req.query.search) {
+            query.title = req.query.search;
+        }
+        const options = {
+            page: parseInt(page, 10) || 1,
+            limit: process.env.PAGINATION_LIMIT,
+            populate: 'categoryId',
+        }
+         postsModel.paginate(query, options).then((results, err) => {
+            res.render('admin/posts/index.pug', {
+                'title': 'Posts List',
+                success_message: req.flash('success_message'),
+                error_message: req.flash('error_message'),
+                posts: results.docs,
+                reqData: req.query,
+                paging_counter: results.pagingCounter,
+                limit: results.limit,
+                total_docs: results.totalDocs,
+                page_count: results.totalPages,
+                current_page: results.page,
+            });
         });
-        console.log('Working');
-        // const page = req.query.page;
-        // const query = {};
-        // if (req.query.search) {
-        //     query.name = req.query.search;
-        // }
-        // const options = {
-        //     page: parseInt(page, 10) || 1,
-        //     limit: process.env.PAGINATION_LIMIT
-        // }
-        // categoriesModel.paginate(query, options).then((results, err) => {
-        //     res.render('admin/categories/index.pug', {
-        //         'title': 'Categories List',
-        //         success_message: req.flash('success_message'),
-        //         error_message: req.flash('error_message'),
-        //         categories: results.docs,
-        //         reqData: req.query,
-        //         paging_counter: results.pagingCounter,
-        //         limit: results.limit,
-        //         total_docs: results.totalDocs,
-        //         page_count: results.totalPages,
-        //         current_page: results.page,
-        //     });
-        // });
+
     }
 
     static async create(req, res){
@@ -54,6 +43,7 @@ class postsController{
     }
 
     static async store(req, res){
+      
         const post = postsModel(req.body);
         const is_saved = await post.save();
         if (is_saved) {
@@ -62,6 +52,7 @@ class postsController{
                 const thumbFile = req.files.thumb;
                 const uploadPath = __dirname+'/../public/images/posts/' + is_saved._id + '.jpg';
                 thumbFile.mv(uploadPath);
+                await is_saved.updateOne({'fileName' : is_saved._id});
             }
             req.flash('success_message', 'New post saved successfully');
         } else {
